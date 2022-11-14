@@ -21,11 +21,10 @@ function nbgp_place_id_option_key() {
  * @return array|WP_Error
  */
 function nbgp_get_google_place() {
-  // $cached_value = get_transient('nbgp_result');
-  // die($cached_value);
-  // if ($cached_value) {
-  //   return json_decode($cached_value)->result;
-  // }
+  $cached_value = get_transient('nbgp_result');
+  if ($cached_value) {
+    return json_decode($cached_value)->result;
+  }
 
   $api_key = get_option(nbgp_token_option_key());
   if (!$api_key) {
@@ -54,5 +53,15 @@ function nbgp_get_google_place() {
   
   return json_decode($response['body'])->result;
 }
+
+add_action('rest_api_init', function () {
+  register_rest_route('nbgp/v1', '/place', [
+    'methods' => 'GET',
+    'callback' => function () {
+      header('Content-Type: text/html');
+      return rest_ensure_response(nbgp_get_google_place());
+    },
+  ]);
+});
 
 require_once "settings-page.php";
