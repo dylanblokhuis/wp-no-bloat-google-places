@@ -16,6 +16,10 @@ function nbgp_place_id_option_key() {
   return "nbgp_place_id";
 }
 
+function nbgp_language_option_key() {
+  return "nbgp_language";
+}
+
 /**
  * Gets the Google place from the google api
  * @return array|WP_Error
@@ -36,7 +40,12 @@ function nbgp_get_google_place() {
     return new WP_Error(500, "No place id option set");
   }
 
-  $response = wp_remote_get("https://maps.googleapis.com/maps/api/place/details/json?language=nl&place_id=" . $place_id . "&key=" . $api_key);
+  $language = get_option(nbgp_language_option_key());
+  if (!$language) {
+    return new WP_Error(500, "No place id option set");
+  }
+
+  $response = wp_remote_get("https://maps.googleapis.com/maps/api/place/details/json?language=" . $language . "&place_id=" . $place_id . "&key=" . $api_key);
   if (is_wp_error($response)) {
     return new WP_Error(500, "Error fetching Google Places: " . $response->get_error_message());
   }

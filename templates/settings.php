@@ -20,6 +20,11 @@
           <th scope="row">Google Place ID</th>
           <td><input type="text" name="<?php echo nbgp_place_id_option_key(); ?>" style="width: 400px;" value="<?php echo get_option(nbgp_place_id_option_key()); ?>" /></td>
         </tr>      
+
+        <tr valign="top">
+          <th scope="row">Language (shorthand) like "en" or "nl"</th>
+          <td><input type="text" name="<?php echo nbgp_language_option_key(); ?>" style="width: 400px;" value="<?php echo get_option(nbgp_language_option_key()); ?>" /></td>
+        </tr> 
     </table>
     
     <?php submit_button('Save'); ?>
