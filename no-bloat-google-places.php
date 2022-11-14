@@ -2,7 +2,7 @@
 /*
 Plugin Name: No Bloat Google Places
 Description: Access your Google Places easily through a single php function
-Version:     1.1.0
+Version:     1.1.1
 Author:      Dylan Blokhuis
 */
 

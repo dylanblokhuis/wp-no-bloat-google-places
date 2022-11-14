@@ -17,4 +17,5 @@ add_action('admin_menu', function () {
 add_action('admin_init', function () {
   register_setting(NBGP_PLUGIN_SLUG, nbgp_token_option_key());
   register_setting(NBGP_PLUGIN_SLUG, nbgp_place_id_option_key());
+  register_setting(NBGP_PLUGIN_SLUG, nbgp_language_option_key());
 });
